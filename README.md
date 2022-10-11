@@ -1,2 +1,2 @@
-# project_ensyu2022
+# project-ensyu2022
 プロジェクト演習2022
