@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//ノーツ一つ一つの動きを制御
 public class Notes : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -22,6 +24,8 @@ public class Notes : MonoBehaviour
         }
         if(start)
         {
+            //奥に行くほど「＋」、今回はプレイヤー側に送りたいので「ー」
+            //Time.deltaTime:パソコンごとのフレームの違いを修正
             transform.position -= transform.forward * Time.deltaTime * NoteSpeede;
         }
     }
