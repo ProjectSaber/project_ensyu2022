@@ -29,9 +29,6 @@ public class ParticleManager : MonoBehaviour
 		// 当たった相手の色をランダムに変える
 		//other.gameObject.GetComponent<Renderer>().material.color = Random.ColorHSV();
         //other.GetComponent<Collider>().isTrigger = false;
-        //if(other.gameObject.name == "Icube"){
-            //Destroy(other.gameObject);
-        //}
         if(other.gameObject.CompareTag("BreakOutCube")) {
             Destroy(other.gameObject);
         }
