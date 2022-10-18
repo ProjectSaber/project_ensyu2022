@@ -38,7 +38,7 @@ public class NotesManager : MonoBehaviour
     void OnEnable()
     {
         noteNum = 0;
-        songName = "test";
+        songName = "WYC";
         Load(songName);
     }
 
@@ -59,7 +59,7 @@ public class NotesManager : MonoBehaviour
             NoteType.Add(inputJson.notes[i].type);
 
             float z = NotesTime[i] * NotesSpeed;
-            NotesObj.Add(Instantiate(noteObj, new Vector3(inputJson.notes[i].block - 1.5f, 0.0f + Random.Range(1, 7), z), Quaternion.identity));
+            NotesObj.Add(Instantiate(noteObj, new Vector3(inputJson.notes[i].block - 1.5f + Random.Range(-5, 5), 0.0f + Random.Range(2, 7), z), Quaternion.identity));
         }
     }
 }

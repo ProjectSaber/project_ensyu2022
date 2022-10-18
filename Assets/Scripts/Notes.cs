@@ -10,7 +10,7 @@ public class Notes : MonoBehaviour
         
     }
 
-    int NoteSpeede = 20;
+    int NoteSpeede = 16;
     bool start;
 
     // Update is called once per frame
