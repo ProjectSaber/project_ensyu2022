@@ -51,17 +51,19 @@ public class NotesManager : MonoBehaviour
 
         for (int i = 0; i < inputJson.notes.Length; i++)
         {
-            float kankaku = 60 / (inputJson.BPM * (float)inputJson.notes[i].LPB);
-            float beatSec = kankaku * (float)inputJson.notes[i].LPB;
+            float interval = 60 / (inputJson.BPM * (float)inputJson.notes[i].LPB);
+            float beatSec = interval * (float)inputJson.notes[i].LPB;
             float time = (beatSec * inputJson.notes[i].num / (float)inputJson.notes[i].LPB) + inputJson.offset * 0.01f;
             NotesTime.Add(time);
             LaneNum.Add(inputJson.notes[i].block);
             NoteType.Add(inputJson.notes[i].type);
 
+            float x = inputJson.notes[i].block - 1.5f;
+            float y = 0.0f + Random.Range(1, 7);
             float z = NotesTime[i] * NotesSpeed;
-
+            
             //jsonから情報を読み込んでノーツを生成する処理
-            NotesObj.Add(Instantiate(noteObj, new Vector3(inputJson.notes[i].block - 1.5f, 0.0f + Random.Range(1, 7), z), Quaternion.identity));
+            NotesObj.Add(Instantiate(noteObj, new Vector3(x, y, z), Quaternion.identity));
         }
     }
 }
