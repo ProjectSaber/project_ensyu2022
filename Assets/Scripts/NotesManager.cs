@@ -26,6 +26,7 @@ public class NotesManager : MonoBehaviour
 {
     public int noteNum;
     private string songName;
+    private int angle = 0;
 
     public List<int> LaneNum = new List<int>();
     public List<int> NoteType = new List<int>();
@@ -59,10 +60,21 @@ public class NotesManager : MonoBehaviour
             NoteType.Add(inputJson.notes[i].type);
 
             float x = inputJson.notes[i].block - 1.5f;
-            float y = 0.0f + Random.Range(1, 7);
+            float y = 0.0f + Random.Range(2, 7);
             float z = NotesTime[i] * NotesSpeed;
+
             
+            float rotate_x =  0;
+            float rotate_y =  0;
+            float rotate_z =  0;
+            
+            rotate_x =  inputJson.notes[i].block + Random.Range(-10, 10);
+            rotate_y =  0.0f + Random.Range(1, 3);
+            rotate_z =  0.0f + Random.Range(0, 1);
+            
+
             //jsonから情報を読み込んでノーツを生成する処理
+            //  NotesObj.Add(Instantiate(noteObj, new Vector3(x, y, z), Quaternion.Euler(rotate_x, rotate_y, rotate_z)));
             NotesObj.Add(Instantiate(noteObj, new Vector3(x, y, z), Quaternion.identity));
         }
     }
