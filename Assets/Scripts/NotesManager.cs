@@ -58,8 +58,13 @@ public class NotesManager : MonoBehaviour
             LaneNum.Add(inputJson.notes[i].block);
             NoteType.Add(inputJson.notes[i].type);
 
+            float r = inputJson.notes[i].block - 0.0f + Random.Range(-5,5);
             float z = NotesTime[i] * NotesSpeed;
-            NotesObj.Add(Instantiate(noteObj, new Vector3(inputJson.notes[i].block - 1.5f + Random.Range(-5, 5), 0.0f + Random.Range(2, 7), z), Quaternion.identity));
+            if(r > 0){
+                NotesObj.Add(Instantiate(noteObj_right, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.identity));
+            }else{
+                NotesObj.Add(Instantiate(noteObj, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.identity));
+            }
         }
     }
 }
