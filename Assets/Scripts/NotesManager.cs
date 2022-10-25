@@ -34,6 +34,7 @@ public class NotesManager : MonoBehaviour
 
     [SerializeField] private float NotesSpeed;
     [SerializeField] GameObject noteObj;
+    [SerializeField] GameObject noteObj_right;
 
     void OnEnable()
     {
