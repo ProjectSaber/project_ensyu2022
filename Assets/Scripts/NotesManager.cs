@@ -35,7 +35,7 @@ public class NotesManager : MonoBehaviour
 
     [SerializeField] private float NotesSpeed;
     [SerializeField] GameObject noteObj;
-    [SerializeField] GameObject noteObj_aaa;
+    // [SerializeField] GameObject noteObj_aaa;
 
     void OnEnable()
     {
@@ -75,8 +75,8 @@ public class NotesManager : MonoBehaviour
             
 
             //jsonから情報を読み込んでノーツを生成する処理
-            // NotesObj.Add(Instantiate(noteObj, new Vector3(x, y, z), Quaternion.Euler(rotate_x, rotate_y, rotate_z)));
-            NotesObj.Add(Instantiate(noteObj_aaa, new Vector3(x, y, z), Quaternion.identity));
+            NotesObj.Add(Instantiate(noteObj, new Vector3(x, y, z), Quaternion.identity));
+            // NotesObj.Add(Instantiate(noteObj_aaa, new Vector3(x, y, z), Quaternion.identity));
         }
     }
 }
