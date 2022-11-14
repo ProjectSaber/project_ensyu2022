@@ -13,7 +13,7 @@ public class Notes : MonoBehaviour
     }
 
     //投げる水平スピード
-    public float speed = 10;
+    public float speed = 20;
 
     //射出角度
     [Range(0.0f, 90.0f)] public float throwingAngle = 60.0f;
@@ -33,20 +33,20 @@ public class Notes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int i = Random.Range(0, 2);
+        int i = Random.Range(0, 10);
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
             start = true;
         }
-        if(start && i == 1)
+        if(start && i == 0)
         {
-            // transform.eulerAngles = new Vector3(90, 0, 0);
+            _Throw();
+        } else {
+           // transform.eulerAngles = new Vector3(90, 0, 0);
             //奥に行くほど「＋」、今回はプレイヤー側に送りたいので「ー」
             //Time.deltaTime:パソコンごとのフレームの違いを修正
             transform.position -= transform.forward * Time.deltaTime * NoteSpeede;
-        } else {
-            _Throw();
         }
     }
 
