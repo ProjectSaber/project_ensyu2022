@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 [Serializable]
 public class Data
 {
@@ -24,6 +25,7 @@ public class Note
 
 public class NotesManager : MonoBehaviour
 {
+
     public int noteNum;
     private string songName;
     private int angle = 0;
@@ -35,7 +37,7 @@ public class NotesManager : MonoBehaviour
 
     [SerializeField] private float NotesSpeed;
     [SerializeField] GameObject noteObj;
-    // [SerializeField] GameObject noteObj_aaa;
+    [SerializeField] GameObject noteObj_right;
 
     void OnEnable()
     {
@@ -60,28 +62,16 @@ public class NotesManager : MonoBehaviour
             LaneNum.Add(inputJson.notes[i].block);
             NoteType.Add(inputJson.notes[i].type);
 
-            float x = inputJson.notes[i].block - 1.5f;
-            float y = 0.0f + Random.Range(2, 7);
-            float z = NotesTime[i] * NotesSpeed;
+            float r = inputJson.notes[i].block - 0.0f + Random.Range(-4,4);
+            float z = NotesTime[i] * NotesSpeed - 8.7f;
+            //float xr = Mathf.Cos(90)*r - Mathf.Sin(90)*z;
+            //float xz = Mathf.Sin(90)*r + Mathf.Cos(90)*z;
+            if(r > 0){
+                NotesObj.Add(Instantiate(noteObj_right, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, 0, 0)));
+            }else{
+                NotesObj.Add(Instantiate(noteObj, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, 0, 0)));
+            }
 
-            // float z = inputJson.notes[i].block - 10.5f;
-            // float x = NotesTime[i] * NotesSpeed;;
-            // float y = 0.0f + Random.Range(2, 7);
-
-            
-            // float rotate_x = 0;
-            // float rotate_y = 0;
-            // float rotate_z = 0;
-            
-            // rotate_x =  inputJson.notes[i].block + Random.Range(-10, 10);
-            // rotate_y =  0.0f + Random.Range(1, 3);
-            // rotate_z =  0.0f + Random.Range(0, 1);
-            
-
-            //jsonから情報を読み込んでノーツを生成する処理
-            NotesObj.Add(Instantiate(noteObj, new Vector3(x, y, z), Quaternion.identity));
-            //this.gameObject.SetActive(false);
-            // NotesObj.Add(Instantiate(noteObj_aaa, new Vector3(x, y, z), Quaternion.identity));
         }
     }
 }
