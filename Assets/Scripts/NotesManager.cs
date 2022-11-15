@@ -64,9 +64,9 @@ public class NotesManager : MonoBehaviour
             //float xr = Mathf.Cos(90)*r - Mathf.Sin(90)*z;
             //float xz = Mathf.Sin(90)*r + Mathf.Cos(90)*z;
             if(r > 0){
-                NotesObj.Add(Instantiate(noteObj_right, new Vector3(xr, 0.0f + Random.Range(2, 7), xz), Quaternion.Euler(0, -90, 0)));
+                NotesObj.Add(Instantiate(noteObj_right, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, -90, 0)));
             }else{
-                NotesObj.Add(Instantiate(noteObj, new Vector3(xr, 0.0f + Random.Range(2, 7), xz), Quaternion.Euler(0, -90, 0)));
+                NotesObj.Add(Instantiate(noteObj, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, -90, 0)));
             }
         }
     }
