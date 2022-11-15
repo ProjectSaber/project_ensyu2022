@@ -13,10 +13,10 @@ public class Notes : MonoBehaviour
     }
 
     //投げる水平スピード
-    public float speed = 20;
+    public float speed = 10;
 
     //射出角度
-    [Range(0.0f, 90.0f)] public float throwingAngle = 60.0f;
+    [Range(0.0f, 60.0f)] public float throwingAngle = 60.0f;
 
     //地上にいるときのY座標
     public float baseHeight = 1.0f;
@@ -39,13 +39,15 @@ public class Notes : MonoBehaviour
         {
             start = true;
         }
-        if(start && i == 0)
+
+        if(start && i>=6)
         {
             _Throw();
-        } else {
-           // transform.eulerAngles = new Vector3(90, 0, 0);
+        } 
+        if(start && i<6) {
             //奥に行くほど「＋」、今回はプレイヤー側に送りたいので「ー」
             //Time.deltaTime:パソコンごとのフレームの違いを修正
+            // transform.eulerAngles = new Vector3(90, 0, 0);
             transform.position -= transform.forward * Time.deltaTime * NoteSpeede;
         }
     }
@@ -55,7 +57,8 @@ public class Notes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var mouseRay = Camera.main.ScreenPointToRay(new Vector3(-2, 1, -100));
+            var mouseRay = Camera.main.ScreenPointToRay(new Vector3(100, 100, 0));
+            print($"{mouseRay}");
 
             //地上を表す平面を作成
             var basePlane = new Plane(Vector3.up, -baseHeight);
@@ -72,7 +75,7 @@ public class Notes : MonoBehaviour
                 Travel = 0.0f;
                 Throwing = true;
 
-                print($"{FromPoint} -> {ToPoint}");
+                // print($"{FromPoint} -> {ToPoint}");
             }
         }
 
