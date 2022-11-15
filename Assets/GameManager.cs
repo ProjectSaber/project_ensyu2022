@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
             //ゲームクリア
             Debug.Log("ゲームクリア");
         } else {
-            Invoke(nameof(GameOver), 30);
+            Invoke(nameof(GameOver), 35);
         }
         
     }
