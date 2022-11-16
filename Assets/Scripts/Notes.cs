@@ -25,7 +25,7 @@ public class Notes : MonoBehaviour
     }
 
     //投げる水平スピード
-    public float speed = 10;
+    public float speed = 20;
 
     //射出角度
     [Range(0.0f, 60.0f)] public float throwingAngle = 60.0f;
@@ -66,8 +66,7 @@ public class Notes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var mouseRay = Camera.main.ScreenPointToRay(new Vector3(100, 100, 0));
-            print($"{mouseRay}");
+            var mouseRay = Camera.main.ScreenPointToRay(new Vector3(0, 0, 0));
 
             //地上を表す平面を作成
             var basePlane = new Plane(Vector3.up, -baseHeight);
@@ -89,36 +88,39 @@ public class Notes : MonoBehaviour
 
         if (Throwing)
         {
-            //出発地からの水平移動量を求め...
-            Travel += speed * Time.deltaTime;
+            transform.position -= transform.forward * Time.deltaTime * NoteSpeede;
+            // if (transform.position.z <= 20){
+            //     //出発地からの水平移動量を求め...
+            //     Travel += speed * Time.deltaTime;
 
-            //出発地と目的地の距離を求め...
-            var distance = Vector3.Distance(FromPoint, ToPoint);
+            //     //出発地と目的地の距離を求め...
+            //     var distance = Vector3.Distance(FromPoint, ToPoint);
 
-            //進行割合を求め...
-            var t = Travel / distance;
+            //     //進行割合を求め...
+            //     var t = Travel / distance;
 
-            if (t < 1.0f)
-            {
-                //tが0.5（つまり中間地点）からどれだけ離れているかを求める
-                //中間地点で0.0、出発地や目的地で1.0となるような値にする
-                var d = Mathf.Abs(t - 0.5f) * 2.0f;
+            //     if (t < 1.0f)
+            //     {
+            //         //tが0.5（つまり中間地点）からどれだけ離れているかを求める
+            //         //中間地点で0.0、出発地や目的地で1.0となるような値にする
+            //         var d = Mathf.Abs(t - 0.5f) * 2.0f;
 
-                //現在の水平位置を決め...
-                var p = Vector3.Lerp(FromPoint, ToPoint, t);
+            //         //現在の水平位置を決め...
+            //         var p = Vector3.Lerp(FromPoint, ToPoint, t);
 
-                //高さを二次関数の曲線に沿って調整し...
-                p.y += Mathf.Tan(Mathf.Deg2Rad * this.throwingAngle) * 0.25f * distance * (1.0f - (d * d));
+            //         //高さを二次関数の曲線に沿って調整し...
+            //         p.y += Mathf.Tan(Mathf.Deg2Rad * this.throwingAngle) * 0.25f * distance * (1.0f - (d * d));
 
-                //位置を設定する
-                transform.position = p;
-            }
-            else
-            {
-                //tが1.0に到達したら移動終了とする
-                transform.position = ToPoint;
-                Throwing = false;
-            }
+            //         //位置を設定する
+            //         transform.position = p;
+            //     }
+            //     else
+            //     {
+            //         //tが1.0に到達したら移動終了とする
+            //         transform.position = ToPoint;
+            //         Throwing = false;
+            //     }
+            // }
         }
     }
 }
