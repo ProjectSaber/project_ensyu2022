@@ -32,7 +32,10 @@ public class Notes : MonoBehaviour
 
     //地上にいるときのY座標
     public float baseHeight = 1.0f;
-    public int hantei = 0;
+
+    
+
+    
     
     //投げるフラグ
     bool Throwing;
@@ -52,20 +55,24 @@ public class Notes : MonoBehaviour
             start = true;
         }
 
-        if(start && hantei >= 4) {
-            //奥に行くほど「＋」、今回はプレイヤー側に送りたいので「ー」
-            //Time.deltaTime:パソコンごとのフレームの違いを修正
-            transform.position -= transform.forward * Time.deltaTime * NoteSpeede;
-        }
-        if(start && hantei <= 3) {
-            _Throw();
-        }
+        
 
         
     }
+
+
     void _Throw()
     {
-        //左クリック時のマウス座標を取得
+        int hantei = Random.Range(0, 10);
+
+        if(start && hantei >= 1) {
+            //奥に行くほど「＋」、今回はプレイヤー側に送りたいので「ー」
+            //Time.deltaTime:パソコンごとのフレームの違いを修正
+            transform.position -= transform.forward * Time.deltaTime * NoteSpeede;
+        }else if(start && hantei == 0){
+            _Throw();
+        }
+        
         if (transform.position.z >= 10 && transform.position.z <= 11)
         {
             //マウスポインタの位置を指すレイを作成
@@ -87,14 +94,14 @@ public class Notes : MonoBehaviour
                 FromPoint = transform.position;
                 FromPoint.y = baseHeight;
 
-                //移動量を0.0にリセットしておく
+                 //移動量を0.0にリセットしておく
                 Travel = 0.0f;
                 Throwing = true;
 
                 // print($"{FromPoint} -> {ToPoint}");
             }
         }
-
+        
         if (Throwing)
         {
             //出発地からの水平移動量を求め...
@@ -128,7 +135,6 @@ public class Notes : MonoBehaviour
                 Throwing = false;
             }
         }
-        public int hantei = Random.Range(0, 10);
     }
 }
 
