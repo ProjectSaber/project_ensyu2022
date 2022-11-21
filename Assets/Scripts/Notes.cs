@@ -32,7 +32,8 @@ public class Notes : MonoBehaviour
 
     //地上にいるときのY座標
     public float baseHeight = 1.0f;
-
+    public int hantei = 0;
+    
     //投げるフラグ
     bool Throwing;
 
@@ -45,29 +46,36 @@ public class Notes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int i = Random.Range(0, 10);
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
             start = true;
         }
 
-        if(start && i>=6)
-        {
-            _Throw();
-        } 
-        if(start && i<6) {
+        if(start && hantei >= 4) {
             //奥に行くほど「＋」、今回はプレイヤー側に送りたいので「ー」
             //Time.deltaTime:パソコンごとのフレームの違いを修正
             transform.position -= transform.forward * Time.deltaTime * NoteSpeede;
         }
+        if(start && hantei <= 3) {
+            _Throw();
+        }
+
+        
     }
     void _Throw()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        //左クリック時のマウス座標を取得
+        if (transform.position.z >= 10 && transform.position.z <= 11)
         {
-            var mouseRay = Camera.main.ScreenPointToRay(new Vector3(0, 0, 0));
+            //マウスポインタの位置を指すレイを作成
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition.x = 1;
+            mousePosition.y= 2;
+            mousePosition.z = 1;
 
+            var mouseRay = Camera.main.ScreenPointToRay(mousePosition);
+            // print(Input.mousePosition);
             //地上を表す平面を作成
             var basePlane = new Plane(Vector3.up, -baseHeight);
             if (basePlane.Raycast(mouseRay, out var enter))
@@ -83,45 +91,44 @@ public class Notes : MonoBehaviour
                 Travel = 0.0f;
                 Throwing = true;
 
+                // print($"{FromPoint} -> {ToPoint}");
             }
         }
 
         if (Throwing)
         {
-            transform.position -= transform.forward * Time.deltaTime * NoteSpeede;
-            // if (transform.position.z <= 20){
-            //     //出発地からの水平移動量を求め...
-            //     Travel += speed * Time.deltaTime;
+            //出発地からの水平移動量を求め...
+            Travel += speed * Time.deltaTime;
 
-            //     //出発地と目的地の距離を求め...
-            //     var distance = Vector3.Distance(FromPoint, ToPoint);
+            //出発地と目的地の距離を求め...
+            var distance = Vector3.Distance(FromPoint, ToPoint);
 
-            //     //進行割合を求め...
-            //     var t = Travel / distance;
+            //進行割合を求め...
+            var t = Travel / distance;
 
-            //     if (t < 1.0f)
-            //     {
-            //         //tが0.5（つまり中間地点）からどれだけ離れているかを求める
-            //         //中間地点で0.0、出発地や目的地で1.0となるような値にする
-            //         var d = Mathf.Abs(t - 0.5f) * 2.0f;
+            if (t < 1.0f)
+            {
+                //tが0.5（つまり中間地点）からどれだけ離れているかを求める
+                //中間地点で0.0、出発地や目的地で1.0となるような値にする
+                var d = Mathf.Abs(t - 0.5f) * 2.0f;
 
-            //         //現在の水平位置を決め...
-            //         var p = Vector3.Lerp(FromPoint, ToPoint, t);
+                //現在の水平位置を決め...
+                var p = Vector3.Lerp(FromPoint, ToPoint, t);
 
-            //         //高さを二次関数の曲線に沿って調整し...
-            //         p.y += Mathf.Tan(Mathf.Deg2Rad * this.throwingAngle) * 0.25f * distance * (1.0f - (d * d));
+                //高さを二次関数の曲線に沿って調整し...
+                p.y += Mathf.Tan(Mathf.Deg2Rad * this.throwingAngle) * 0.25f * distance * (1.0f - (d * d));
 
-            //         //位置を設定する
-            //         transform.position = p;
-            //     }
-            //     else
-            //     {
-            //         //tが1.0に到達したら移動終了とする
-            //         transform.position = ToPoint;
-            //         Throwing = false;
-            //     }
-            // }
+                //位置を設定する
+                transform.position = p;
+            }
+            else
+            {
+                //tが1.0に到達したら移動終了とする
+                transform.position = ToPoint;
+                Throwing = false;
+            }
         }
+        public int hantei = Random.Range(0, 10);
     }
 }
 
