@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 223255512}
   - component: {fileID: 223255511}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UIGamestart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,8 +459,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.7497568, g: 0, b: 1, a: 1}
-    m_HighlightedColor: {r: 0, g: 1, b: 0.95107245, a: 1}
+    m_NormalColor: {r: 0.72435236, g: 0, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9529412, g: 0.039215688, b: 0.9098039, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}

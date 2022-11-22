@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI;
+    public GameObject gameClearUI;
 
     // Start is called before the first frame update
     void Start()
@@ -17,18 +18,26 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (ScoreTest.score >= 100) {
-            //ゲームクリア
-            Debug.Log("ゲームクリア");
+            //ゲームクリア画面を表示
+            //Invoke関数は35秒後にGameClear関数を実行する
+            Invoke(nameof(GameClear), 35);
         } else {
+            //ゲームオーバー画面を表示
             Invoke(nameof(GameOver), 35);
         }
         
     }
 
+    public void GameClear() {
+        //ゲームクリア
+        Debug.Log("ゲームクリア");
+        gameClearUI.SetActive(true);
+    }
+
     public void GameOver() {
         //ゲームオーバー
-            Debug.Log("ゲームオーバー");
-            gameOverUI.SetActive(true);
+        Debug.Log("ゲームオーバー");
+        gameOverUI.SetActive(true);
     }
 
     public void GameReplay() {
