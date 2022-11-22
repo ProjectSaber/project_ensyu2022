@@ -55,9 +55,10 @@ public class Notes : MonoBehaviour
             start = true;
         }
 
-        
+        if(start){
+            _Throw();
+        }
 
-        
     }
 
 
@@ -65,43 +66,42 @@ public class Notes : MonoBehaviour
     {
         int hantei = Random.Range(0, 10);
 
-        if(start && hantei >= 1) {
+        if(hantei >= 1) {
             //奥に行くほど「＋」、今回はプレイヤー側に送りたいので「ー」
             //Time.deltaTime:パソコンごとのフレームの違いを修正
             transform.position -= transform.forward * Time.deltaTime * NoteSpeede;
-        }else if(start && hantei == 0){
-            _Throw();
-        }
-        
-        if (transform.position.z >= 10 && transform.position.z <= 11)
-        {
-            //マウスポインタの位置を指すレイを作成
-            Vector3 mousePosition = Input.mousePosition;
-            mousePosition.x = 1;
-            mousePosition.y= 2;
-            mousePosition.z = 1;
-
-            var mouseRay = Camera.main.ScreenPointToRay(mousePosition);
-            // print(Input.mousePosition);
-            //地上を表す平面を作成
-            var basePlane = new Plane(Vector3.up, -baseHeight);
-            if (basePlane.Raycast(mouseRay, out var enter))
+        }else if(hantei == 0){
+            if (transform.position.z >= 10.00 && transform.position.z <= 10.10)
             {
-                //レイと平面の交差があれば、その地点を目的地とする
-                ToPoint = mouseRay.GetPoint(enter);
+                //マウスポインタの位置を指すレイを作成
+                Vector3 mousePosition = Input.mousePosition;
 
-                //現在の位置を地上の高さに合わせ、その地点を出発地とする
-                FromPoint = transform.position;
-                FromPoint.y = baseHeight;
+                
+                mousePosition.x = 0.0f + Random.Range(2, 7);
+                mousePosition.y= 0.0f + Random.Range(2, 7);
+                mousePosition.z = 1.0f;
 
-                 //移動量を0.0にリセットしておく
-                Travel = 0.0f;
-                Throwing = true;
+                var mouseRay = Camera.main.ScreenPointToRay(mousePosition);
+                // print(Input.mousePosition);
+                //地上を表す平面を作成
+                var basePlane = new Plane(Vector3.up, -baseHeight);
+                if (basePlane.Raycast(mouseRay, out var enter))
+                {
+                    //レイと平面の交差があれば、その地点を目的地とする
+                    ToPoint = mouseRay.GetPoint(enter);
 
-                // print($"{FromPoint} -> {ToPoint}");
+                    //現在の位置を地上の高さに合わせ、その地点を出発地とする
+                    FromPoint = transform.position;
+                    FromPoint.y = baseHeight;
+
+                    //移動量を0.0にリセットしておく
+                    Travel = 0.0f;
+                    Throwing = true;
+                }
             }
-        }
         
+        }
+
         if (Throwing)
         {
             //出発地からの水平移動量を求め...
