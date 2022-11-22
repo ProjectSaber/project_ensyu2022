@@ -17,13 +17,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ScoreTest.score >= 100) {
+        if (ScoreScript.score >= 100) {
             //ゲームクリア画面を表示
             //Invoke関数は35秒後にGameClear関数を実行する
-            Invoke(nameof(GameClear), 35);
+            Invoke(nameof(GameClear), 2);
         } else {
             //ゲームオーバー画面を表示
-            Invoke(nameof(GameOver), 35);
+            Invoke(nameof(GameOver), 2);
         }
         
     }
