@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 //ノーツ一つ一つの動きを制御
 public class Notes : MonoBehaviour
 {
@@ -76,7 +75,6 @@ public class Notes : MonoBehaviour
                 //マウスポインタの位置を指すレイを作成
                 Vector3 mousePosition = Input.mousePosition;
 
-                
                 mousePosition.x = 0.0f + Random.Range(2, 7);
                 mousePosition.y= 0.0f + Random.Range(2, 7);
                 mousePosition.z = 1.0f;
@@ -104,7 +102,7 @@ public class Notes : MonoBehaviour
 
         if (Throwing)
         {
-            //出発地からの水平移動量を求め...
+            //出発地からの水平移動量を求める
             Travel += speed * Time.deltaTime;
 
             //出発地と目的地の距離を求め...
