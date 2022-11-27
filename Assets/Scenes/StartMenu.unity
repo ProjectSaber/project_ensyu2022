@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 223255512}
   - component: {fileID: 223255511}
   m_Layer: 5
-  m_Name: UIGamestart
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ad8db13d831b843b0829ab45e4dd9004, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 71ef1f4a61c5a45a6b3e04ffc2ecb842, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 611168666}
   - component: {fileID: 611168665}
   - component: {fileID: 611168664}
-  - component: {fileID: 611168663}
+  - component: {fileID: 611168667}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -426,18 +426,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -132}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &611168663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611168661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32093e84b08f94f839df2a6760b48f22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &611168664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,8 +447,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.72435236, g: 0, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9529412, g: 0.039215688, b: 0.9098039, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -482,7 +470,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 611168663}
+      - m_Target: {fileID: 611168667}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: OnStart
         m_Mode: 1
@@ -507,7 +495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8490566, g: 0.3244037, b: 0.82425684, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -532,6 +520,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611168661}
   m_CullTransparentMesh: 1
+--- !u!114 &611168667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611168661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac6a24fcc6bb4373a4a06cbe5778abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &837923307
 GameObject:
   m_ObjectHideFlags: 0
