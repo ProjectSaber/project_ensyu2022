@@ -10,9 +10,12 @@ public class MusicManager : MonoBehaviour
     string songName;
     bool played;
 
+    public ScoreManager Sm;
+
     // Start is called before the first frame update
     void Start()
     {
+        Sm = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         songName = "WYC";
         audio = GetComponent<AudioSource>();
         Music = (AudioClip)Resources.Load("Musics/" + songName);
@@ -27,6 +30,9 @@ public class MusicManager : MonoBehaviour
             played = true;
             //GetComponent<AudioSource>().Play();
             audio.Play();
+        }
+        if(Sm.Lflag == 1){
+            audio.Stop();
         }
     }
 }

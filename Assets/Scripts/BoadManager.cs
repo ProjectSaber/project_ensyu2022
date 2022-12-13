@@ -5,18 +5,24 @@ using UnityEngine;
 public class BoadManager : MonoBehaviour
 {
 
+    public ScoreManager Sm;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+         Sm = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
 
     //回転中かどうか
     bool coroutineBool = false;
+
+    int Bflag = 0;
+
+    bool switchflag = true;
  
     void Update()
     {
-        if(Input.GetKeyDown("right"))
+        if((Input.GetKeyDown("right") || Sm.Sf == 1) && switchflag)
         {
             //回転中ではない場合は実行 
             if (!coroutineBool)
@@ -24,6 +30,7 @@ public class BoadManager : MonoBehaviour
                 coroutineBool = true;
                 StartCoroutine("RightMove");
             }
+            switchflag = false;
         }
  
         if(Input.GetKeyDown("left"))
@@ -46,15 +53,15 @@ public class BoadManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown("up"))
-        {
-            //回転中ではない場合は実行 
-            if (!coroutineBool)
-            {
-                coroutineBool = true;
-                StartCoroutine("UpMove");
-            }
-        }
+        // if(Input.GetKeyDown("up"))
+        // {
+        //     //回転中ではない場合は実行 
+        //     if (!coroutineBool)
+        //     {
+        //         coroutineBool = true;
+        //         StartCoroutine("UpMove");
+        //     }
+        // }
          
     }
  
@@ -80,24 +87,34 @@ public class BoadManager : MonoBehaviour
         coroutineBool = false;
     }
 
+    // //下に回転して180°でストップ
+    // IEnumerator DownMove()
+    // {
+    //     for (int turn=0; turn<180; turn++)
+    //     {
+    //         transform.Rotate(1,0,0);
+    //         yield return new WaitForSeconds(0.001f);
+    //     }
+    //     coroutineBool = false;
+    // }
+
     //下に回転して180°でストップ
     IEnumerator DownMove()
     {
-        for (int turn=0; turn<180; turn++)
-        {
-            transform.Rotate(1,0,0);
-            yield return new WaitForSeconds(0.001f);
+        if(Bflag == 0){
+            for (int turn=0; turn<180; turn++)
+            {
+                transform.Rotate(1,0,0);
+                yield return new WaitForSeconds(0.001f);
+            }
+            Bflag = 1;
         }
-        coroutineBool = false;
-    }
-
-    //上に回転して180°でストップ
-    IEnumerator UpMove()
-    {
-        for (int turn=0; turn<180; turn++)
-        {
-            transform.Rotate(-1,0,0);
-            yield return new WaitForSeconds(0.001f);
+        else if(Bflag == 1){
+            for(int turn=0; turn < 180; turn++){
+                transform.Rotate(-1,0,0);
+                yield return new WaitForSeconds(0.0001f);
+            }
+            Bflag = 0;
         }
         coroutineBool = false;
     }

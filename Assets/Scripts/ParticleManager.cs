@@ -5,8 +5,12 @@ using UnityEngine;
 public class ParticleManager : MonoBehaviour
 {
 
+    public GameObject particleObject;
+
     public ScoreManager Sm;
     private int Status; 
+
+    int Combocal = 0;
 
 
     // Start is called before the first frame update
@@ -34,7 +38,28 @@ public class ParticleManager : MonoBehaviour
         //other.GetComponent<Collider>().isTrigger = false;
         if(other.gameObject.CompareTag("BreakOutCube")) {
             if(Status == 0){
-                Sm.Score += 100;
+                Instantiate(particleObject, other.transform.position, Quaternion.identity); //パーティクルエフェクト用オブジェクト
+                Sm.Combo++;
+                Combocal = Sm.Combo / 10;
+                Sm.Score = Sm.Score + (Combocal * 10) + 100;
+                Destroy(other.gameObject);
+            }
+        }else if(other.gameObject.CompareTag("Lastnotes")){
+            Sm.Lflag = 1;
+            if(Status == 0){
+                Instantiate(particleObject, other.transform.position, Quaternion.identity); //パーティクルエフェクト用オブジェクト
+                Sm.Combo++;
+                Combocal = Sm.Combo / 10;
+                Sm.Score = Sm.Score + (Combocal * 10) + 100;
+                Destroy(other.gameObject);
+            }
+        }else if(other.gameObject.CompareTag("RightTurn")){
+            Sm.Sf = 1;
+            if(Status == 0){
+                Instantiate(particleObject, other.transform.position, Quaternion.identity); //パーティクルエフェクト用オブジェクト
+                Sm.Combo++;
+                Combocal = Sm.Combo / 10;
+                Sm.Score = Sm.Score + (Combocal * 10) + 100;
                 Destroy(other.gameObject);
             }
         }

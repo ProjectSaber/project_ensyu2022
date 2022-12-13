@@ -25,6 +25,7 @@ public class Note
 
 public class NotesManager : MonoBehaviour
 {
+    public Transform target;
 
     public int noteNum;
     private string songName;
@@ -38,6 +39,16 @@ public class NotesManager : MonoBehaviour
     [SerializeField] private float NotesSpeed;
     [SerializeField] GameObject noteObj;
     [SerializeField] GameObject noteObj_right;
+    [SerializeField] GameObject LastNotes;
+    [SerializeField] GameObject rightNotes;
+
+    public ScoreManager Sm;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Sm = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+    }
 
     void OnEnable()
     {
@@ -63,15 +74,22 @@ public class NotesManager : MonoBehaviour
             NoteType.Add(inputJson.notes[i].type);
 
             float r = inputJson.notes[i].block - 0.0f + Random.Range(-4,4);
-            float z = NotesTime[i] * NotesSpeed - 8.7f;
+            float z = NotesTime[i] * NotesSpeed - target.position.y;
             //float xr = Mathf.Cos(90)*r - Mathf.Sin(90)*z;
             //float xz = Mathf.Sin(90)*r + Mathf.Cos(90)*z;
-            if(r > 0){
-                NotesObj.Add(Instantiate(noteObj_right, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, 0, 0)));
-            }else{
-                NotesObj.Add(Instantiate(noteObj, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, 0, 0)));
+            if(i == 30){
+                NotesObj.Add(Instantiate(rightNotes, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, 0, 0)));
             }
-
+            else if(i != inputJson.notes.Length - 1){
+                if(r > 0){
+                    NotesObj.Add(Instantiate(noteObj_right, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, 0, 0)));
+                }else{
+                    NotesObj.Add(Instantiate(noteObj, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, 0, 0)));
+                }
+            }
+            else{
+                NotesObj.Add(Instantiate(LastNotes, new Vector3(r, 0.0f + Random.Range(2, 7), z), Quaternion.Euler(0, 0, 0)));
+            }
         }
     }
 }

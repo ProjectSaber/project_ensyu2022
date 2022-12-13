@@ -20,7 +20,7 @@ public class Notes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Sm = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
 
     //投げる水平スピード
@@ -44,6 +44,8 @@ public class Notes : MonoBehaviour
     float Travel;
     int NoteSpeede = 16;
     bool start;
+    bool coroutineBool = false; //回転中に回転コマンドが発動しないようにする
+    bool switchflag = true;
 
     // Update is called once per frame
     void Update()
@@ -52,6 +54,42 @@ public class Notes : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             start = true;
+        }
+        if(((Input.GetKeyDown("right") || Sm.Sf == 1) && !coroutineBool) && switchflag){
+            coroutineBool = true;
+            transform.RotateAround(
+                _center,
+                _axis,
+                90
+            );
+            coroutineBool = false;
+            switchflag = false;
+        }
+        if(Input.GetKeyDown("left") && !coroutineBool){
+            coroutineBool = true;
+            transform.RotateAround(
+                _center,
+                _axis,
+                -90
+            );
+            coroutineBool = false;
+        }
+        if(Input.GetKeyDown("down") && !coroutineBool){
+            coroutineBool = true;
+            transform.RotateAround(
+                _center,
+                _axis,
+                180
+            );
+            coroutineBool = false;
+        }
+
+        if(transform.position.z >-17 && transform.position.z < -14){
+            Sm.Score -= 10;
+            Sm.Combo = 0;
+            if(this.gameObject.CompareTag("Lastnotes")) Sm.Lflag = 1;
+            if(this.gameObject.CompareTag("RightTurn")) Sm.Sf = 1;
+             Destroy(this.gameObject);
         }
 
         if(start){
